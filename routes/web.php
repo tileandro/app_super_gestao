@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\SobreNosController;
+use App\Http\Middleware\LogAcessoMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'PrincipalController@principal')->name('site.index');
+Route::middleware(LogAcessoMiddleware::class)->get('/', 'PrincipalController@principal')->name('site.index');
 Route::get('/sobre-nos', 'SobreNosController@sobreNos')->name('site.sobrenos');
 Route::get('/contato', 'ContatoController@contato')->name('site.contato');
 Route::post('/contato', 'ContatoController@contato')->name('site.contato');
@@ -29,7 +30,9 @@ Route::prefix('/app')->group(
             return 'Clientes';
         })->name('app.clientes');
         Route::get('/fornecedores', 'FornecedorController@index')->name('app.fornecedores');
-        Route::get('/fornecedores/editar/{id}', 'FornecedorController@editar')->name('app.editarFornecedores');
+        Route::get('/fornecedores/editar/{id}', 'FornecedorController@editar')->name('app.verFornecedores');
+        Route::post('/fornecedores/editar/{id}', 'FornecedorController@editar')->name('app.editarFornecedores');
+        Route::post('/fornecedores/editar', 'FornecedorController@editarFornecedores')->name('app.editarFornecedores');
         Route::get('/produtos/', function () {
             return 'Produtos';
         })->name('app.produtos');

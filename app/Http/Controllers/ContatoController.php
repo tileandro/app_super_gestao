@@ -8,9 +8,8 @@ use Illuminate\Support\Facades\Redis;
 
 class ContatoController extends Controller
 {
-    public function contato(Request $request)
+    public function contato()
     {
-        //$contato = new SiteContato();
         return view('site.contato', ['titulo' => 'Contato']);
     }
 

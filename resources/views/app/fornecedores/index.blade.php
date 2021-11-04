@@ -26,7 +26,7 @@
                                 <td>{{$fornecedor['uf']}}</td>
                                 <td>{{date('d/m/Y h:m:s', strtotime($fornecedor['created_at']))}}</td>
                                 <td>{{date('d/m/Y h:m:s', strtotime($fornecedor['updated_at']))}}</td>
-                                <td><a href="{{route('app.editarFornecedores')}}" class="btn btn-warning btn-sm">Editar</a></td>
+                                <td><a href="{{route('app.editarFornecedores')}}/{{$fornecedor['id']}}" class="btn btn-warning btn-sm">Editar</a></td>
                                 <td><a href="#" class="btn btn-danger btn-sm">Deletar</a></td>
                             </tr>
                         @endforeach
