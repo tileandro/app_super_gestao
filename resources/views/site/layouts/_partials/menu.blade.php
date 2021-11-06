@@ -4,17 +4,15 @@
     <!-- Links -->
     <ul class="nav nav-pills">
         <li class="nav-item">
-            <a class="nav-link  {{ $titulo == 'Sobre Nós' ? 'active' : ''}}" href="{{route('site.sobrenos')}}">Sobre Nós</a>
+            <a class="nav-link {{ $titulo == 'Sobre Nós' ? 'active' : ''}}" href="{{route('site.sobrenos')}}">Sobre Nós</a>
         </li>
         <!-- Dropdown -->
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-            APP
-            </a>
+            <a class="nav-link dropdown-toggle {{ $titulo == 'Clientes' or $titulo == 'Fornecedores' or $titulo == 'Produtos' ? 'active' : ''}}" href="#" id="navbardrop" data-toggle="dropdown">APP</a>
             <div class="dropdown-menu">
-            <a class="dropdown-item" href="{{route('app.clientes')}}">Clientes</a>
-            <a class="dropdown-item" href="{{route('app.fornecedores')}}">Fornecedores</a>
-            <a class="dropdown-item" href="{{route('app.produtos')}}">Produtos</a>
+                <a class="dropdown-item {{ $titulo == 'Clientes' ? 'active' : ''}}" href="{{route('app.clientes')}}">Clientes</a>
+                <a class="dropdown-item {{ $titulo == 'Fornecedores' ? 'active' : ''}}" href="{{route('app.fornecedores')}}">Fornecedores</a>
+                <a class="dropdown-item {{ $titulo == 'Produtos' ? 'active' : ''}}" href="{{route('app.produtos')}}">Produtos</a>
             </div>
         </li>
         <li class="nav-item">

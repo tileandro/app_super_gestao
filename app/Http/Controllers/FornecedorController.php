@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Fornecedor;
+use App\Http\Middleware\AutenticacaoMiddleware;
+use App\Http\Middleware\LogAcessoMiddleware;
+use App\LogAcesso;
+use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 
 class FornecedorController extends Controller
