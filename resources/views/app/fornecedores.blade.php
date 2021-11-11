@@ -13,7 +13,11 @@
                             <th scope="col">UF</th>
                             <th scope="col">DATA DE CRIAÇÃO</th>
                             <th scope="col">DATA DE ATUALIZAÇÃO</th>
-                            <th scope="col"></th>
+                            <th scope="col">
+                                <div class="form-group">
+                                    <a href="{{ route('app.criarFornecedor') }}" class="btn btn-primary btn-sm">Criar Fornecedor</a>
+                                </div>
+                            </th>
                             <th scope="col"></th>
                         </tr>
                     </thead>

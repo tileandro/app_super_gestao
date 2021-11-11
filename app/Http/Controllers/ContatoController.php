@@ -10,7 +10,11 @@ class ContatoController extends Controller
 {
     public function contato()
     {
-        return view('site.contato', ['titulo' => 'Contato']);
+        $usuario = '';
+        if (isset($_SESSION['nome']) && $_SESSION['nome'] != '') {
+            $usuario = $_SESSION['nome'];
+        }
+        return view('site.contato', ['titulo' => 'Contato', 'usuario' => $usuario]);
     }
 
     public function salvar(Request $request)
@@ -19,7 +23,7 @@ class ContatoController extends Controller
             [
                 'nome' => 'required|max:50',
                 'telefone' => 'required|max:20',
-                'email' => 'email|max:100|unique:site_contatos',
+                'email' => 'email|max:100',
                 'assunto' => 'required',
                 'mensagem' => 'required'
             ],

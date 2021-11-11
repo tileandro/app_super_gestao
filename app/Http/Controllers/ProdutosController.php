@@ -4,15 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class SobreNosController extends Controller
+class ProdutosController extends Controller
 {
-    public function sobreNos()
+    public function index()
     {
         $usuario = '';
-        session_start();
         if (isset($_SESSION['nome']) && $_SESSION['nome'] != '') {
             $usuario = $_SESSION['nome'];
         }
-        return view('site.sobre-nos', ['titulo' => 'Sobre Nós', 'usuario' => $usuario]);
+        return view('app.produtos', ['titulo' => 'Produtos', 'usuario' => $usuario]);
     }
 }

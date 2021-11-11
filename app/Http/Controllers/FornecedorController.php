@@ -13,8 +13,13 @@ class FornecedorController extends Controller
 {
     public function index()
     {
+        $usuario = '';
+        if (isset($_SESSION['nome']) && $_SESSION['nome'] != '') {
+            $usuario = $_SESSION['nome'];
+        }
+
         $fornecedores = Fornecedor::all();
-        return view('app.fornecedores.index', ['titulo' => 'Fornecedores', 'fornecedores' => $fornecedores]);
+        return view('app.fornecedores', ['titulo' => 'Fornecedores', 'fornecedores' => $fornecedores, 'usuario' => $usuario]);
     }
 
     public function editar($id)
@@ -25,19 +30,19 @@ class FornecedorController extends Controller
 
     public function editarFornecedores(Request $request, $id)
     {
-        echo $request->input('nome');
+        //echo $request->input('nome');
         $request->validate(
             [
                 'nome' => 'required|max:50',
                 'uf' => 'required|max:2',
-                'email' => 'email|max:100|unique:site_contatos'
+                'email' => 'email|max:100|unique:fornecedor'
             ],
             [
                 'nome.required' => 'Campo nome é obrigatório seu preenchimento',
                 'email.email' => 'Campo e-mail é obrigatório seu preenchimento',
                 'uf.required' => 'Campo UF é obrigatório seu preenchimento',
                 'nome.max' => 'Campo nome é permitido até 50 caracteres',
-                'uf.max' => 'Campo telefone é permitido até 2 caracteres',
+                'uf.max' => 'Campo estado é permitido até 2 caracteres',
                 'email.max' => 'Campo e-mail é permitido até 100 caracteres',
                 'email.unique' => 'E-mail já cadastrado, por favor digite outro e-mail.'
             ]
@@ -50,5 +55,36 @@ class FornecedorController extends Controller
             ]
         );
         return back()->with('success', 'Dados enviado com sucesso!');
+    }
+
+    public function create()
+    {
+        $usuario = '';
+        if (isset($_SESSION['nome']) && $_SESSION['nome'] != '') {
+            $usuario = $_SESSION['nome'];
+        }
+        return view('app.fornecedores.criar', ['titulo' => 'Criar Fornecedor', 'usuario' => $usuario]);
+    }
+
+    public function create2(Request $request)
+    {
+        $request->validate(
+            [
+                'nome' => 'required|max:50',
+                'uf' => 'required|max:2',
+                'email' => 'email|max:100|unique:fornecedor'
+            ],
+            [
+                'nome.required' => 'Campo nome é obrigatório seu preenchimento',
+                'email.email' => 'Campo e-mail é obrigatório seu preenchimento',
+                'uf.required' => 'Campo estado é obrigatório seu preenchimento',
+                'nome.max' => 'Campo nome é permitido até 50 caracteres',
+                'uf.max' => 'Campo estado é permitido até 2 caracteres',
+                'email.max' => 'Campo e-mail é permitido até 100 caracteres',
+                'email.unique' => 'E-mail já cadastrado, por favor digite outro e-mail.'
+            ]
+        );
+        Fornecedor::create(['nome' => $request->input('nome'), 'email' => $request->input('email'), 'uf' => $request->input('uf')]);
+        return back()->with('success', 'Fornecedor ' . $request->input('nome') . ' cadastrado sucesso!');
     }
 }

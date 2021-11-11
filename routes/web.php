@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FornecedorController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\SobreNosController;
@@ -26,16 +27,16 @@ Route::get('/login/{erro?}', 'LoginController@index')->name('site.login');
 Route::post('/login', 'LoginController@auntenticar')->name('site.login');
 Route::middleware('autenticacao')->prefix('/app')->group(
     function () {
-        Route::get('/clientes', function () {
-            return 'Clientes';
-        })->name('app.clientes');
+        Route::get('/home', 'HomeController@index')->name('app.home');
+        Route::get('/clientes', 'ClientesController@index')->name('app.clientes');
+        Route::get('/produtos', 'ProdutosController@index')->name('app.produtos');
         Route::get('/fornecedores', 'FornecedorController@index')->name('app.fornecedores');
-        Route::get('/fornecedores/editar/{id}', 'FornecedorController@editar')->name('app.verFornecedores');
+        Route::get('/fornecedores/editar/{id}', 'FornecedorController@editar')->name('app.editarFornecedores');
         Route::post('/fornecedores/editar/{id}', 'FornecedorController@editar')->name('app.editarFornecedores');
+        Route::get('/fornecedores/criar', 'FornecedorController@create')->name('app.criarFornecedor');
+        Route::post('/fornecedores/criar', 'FornecedorController@create2')->name('app.criarFornecedor');
         Route::post('/fornecedores/editar', 'FornecedorController@editarFornecedores')->name('app.editarFornecedores');
-        Route::get('/produtos/', function () {
-            return 'Produtos';
-        })->name('app.produtos');
+        Route::get('/sair', 'LoginController@sair')->name('app.sair');
     }
 );
 Route::fallback(function () {
