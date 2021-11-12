@@ -24,13 +24,16 @@ class FornecedorController extends Controller
 
     public function editar($id)
     {
+        $usuario = '';
+        if (isset($_SESSION['nome']) && $_SESSION['nome'] != '') {
+            $usuario = $_SESSION['nome'];
+        }
         $fornecedor = Fornecedor::where('id', $id)->get();
-        return view('app.fornecedores.editar', ['titulo' => 'Editar Fornecedor', 'fornecedor' => $fornecedor]);
+        return view('app.fornecedores.editar', ['titulo' => 'Editar Fornecedor', 'fornecedor' => $fornecedor, 'usuario' => $usuario]);
     }
 
     public function editarFornecedores(Request $request, $id)
     {
-        //echo $request->input('nome');
         $request->validate(
             [
                 'nome' => 'required|max:50',
@@ -47,14 +50,14 @@ class FornecedorController extends Controller
                 'email.unique' => 'E-mail já cadastrado, por favor digite outro e-mail.'
             ]
         );
-        Fornecedor::whereIn('id', [$id])->update(
+        Fornecedor::whereIn('id', [$request->input('id')])->update(
             [
                 'nome' => $request->input('nome'),
                 'email' => $request->input('email'),
                 'uf' => $request->input('uf')
             ]
         );
-        return back()->with('success', 'Dados enviado com sucesso!');
+        return back()->with('success', 'Dados editados com sucesso!');
     }
 
     public function create()
@@ -86,5 +89,11 @@ class FornecedorController extends Controller
         );
         Fornecedor::create(['nome' => $request->input('nome'), 'email' => $request->input('email'), 'uf' => $request->input('uf')]);
         return back()->with('success', 'Fornecedor ' . $request->input('nome') . ' cadastrado sucesso!');
+    }
+
+    public function destroy(Request $request)
+    {
+        Fornecedor::destroy($request->input('idusuario'));
+        return back()->with('success', 'Fornecedor deletado sucesso!');
     }
 }

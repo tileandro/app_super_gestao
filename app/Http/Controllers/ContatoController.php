@@ -11,6 +11,7 @@ class ContatoController extends Controller
     public function contato()
     {
         $usuario = '';
+        session_start();
         if (isset($_SESSION['nome']) && $_SESSION['nome'] != '') {
             $usuario = $_SESSION['nome'];
         }

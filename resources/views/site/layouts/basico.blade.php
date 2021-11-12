@@ -8,19 +8,25 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" crossorigin="anonymous">
         <title>Super Gestão - {{$titulo}}</title>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <header>
+        <header class="fixed-top">
             @include('site.layouts._partials.menu')
         </header>
-        <main class="bd-content order-1 py-5" id="content">
+        <main class="bd-content order-1 py-5 my-3" id="content">
             <div class="container">
                 @yield('conteudo')
             </div>
         </main>
+        <footer class="footer mt-auto py-3 bg-dark text-center link-light fixed-bottom">
+            <div class="container">
+                Todos os Direitos Reservados
+            </div>
+        </footer>
         <!-- JavaScript (Opcional) -->
         <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" crossorigin="anonymous"></script>
         <script src="{{asset('js/bootstrap.min.js')}}" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
@@ -30,6 +36,7 @@
                 $('.dropdown').click(function () {
                     $(this).find('.dropdown-menu').toggle();
                 })
+
                 $('.table').DataTable({
                     "language": {
                         "emptyTable": "Nenhum registro encontrado",

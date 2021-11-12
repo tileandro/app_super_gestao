@@ -18,8 +18,9 @@
         </div>
       @endif
       @foreach ($fornecedor as $fornecedor)
-        <form method="post" action="{{ route('app.editarFornecedores') }}/{{ $fornecedor['id'] }}">
+        <form method="post" action="{{ route('app.atualizarFornecedores') }}">
           @csrf
+          <input type="hidden" name="id" value="{{ $fornecedor['id'] }}">
           <div class="form-group mb-3">
             <input type="text" class="form-control" value="{{ $fornecedor['nome'] }}" id="nome" name="nome"
               placeholder="Nome">

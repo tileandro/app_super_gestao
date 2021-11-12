@@ -35,7 +35,8 @@ Route::middleware('autenticacao')->prefix('/app')->group(
         Route::post('/fornecedores/editar/{id}', 'FornecedorController@editar')->name('app.editarFornecedores');
         Route::get('/fornecedores/criar', 'FornecedorController@create')->name('app.criarFornecedor');
         Route::post('/fornecedores/criar', 'FornecedorController@create2')->name('app.criarFornecedor');
-        Route::post('/fornecedores/editar', 'FornecedorController@editarFornecedores')->name('app.editarFornecedores');
+        Route::post('/fornecedores/editar/{id}', 'FornecedorController@editarFornecedores')->name('app.atualizarFornecedores');
+        Route::post('/fornecedores', 'FornecedorController@destroy')->name('app.deletarFornecedores');
         Route::get('/sair', 'LoginController@sair')->name('app.sair');
     }
 );
