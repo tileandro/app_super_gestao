@@ -1,6 +1,6 @@
 @extends('site.layouts.basico')
 @section('conteudo')
-  <h1>{{ $titulo }}</h1>
+  <h1>{{ $titulo }} {{$usuario}}</h1>
   <div class="row">
     <div class="col-6" style="margin:auto;">
       @if ($errors->any())
@@ -18,7 +18,7 @@
         </div>
       @endif
       @foreach ($fornecedor as $fornecedor)
-        <form method="post" action="{{ route('app.atualizarFornecedores') }}">
+        <form method="post" action="{{route('app.atualizarFornecedores')}}">
           @csrf
           <input type="hidden" name="id" value="{{ $fornecedor['id'] }}">
           <div class="form-group mb-3">

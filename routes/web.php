@@ -6,6 +6,7 @@ use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\SobreNosController;
 use App\Http\Middleware\LogAcessoMiddleware;
 use Illuminate\Support\Facades\Route;
+use phpDocumentor\Reflection\Types\Resource_;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,15 +30,17 @@ Route::middleware('autenticacao')->prefix('/app')->group(
     function () {
         Route::get('/home', 'HomeController@index')->name('app.home');
         Route::get('/clientes', 'ClientesController@index')->name('app.clientes');
-        Route::get('/produtos', 'ProdutosController@index')->name('app.produtos');
+
         Route::get('/fornecedores', 'FornecedorController@index')->name('app.fornecedores');
         Route::get('/fornecedores/editar/{id}', 'FornecedorController@editar')->name('app.editarFornecedores');
-        Route::post('/fornecedores/editar/{id}', 'FornecedorController@editar')->name('app.editarFornecedores');
+        Route::post('/fornecedores/editar', 'FornecedorController@atualizarFornecedores')->name('app.atualizarFornecedores');
         Route::get('/fornecedores/criar', 'FornecedorController@create')->name('app.criarFornecedor');
         Route::post('/fornecedores/criar', 'FornecedorController@create2')->name('app.criarFornecedor');
-        Route::post('/fornecedores/editar/{id}', 'FornecedorController@editarFornecedores')->name('app.atualizarFornecedores');
         Route::post('/fornecedores', 'FornecedorController@destroy')->name('app.deletarFornecedores');
         Route::get('/sair', 'LoginController@sair')->name('app.sair');
+
+        Route::resource('produtos', 'ProdutoController');
+        Route::resource('unidades', 'UnidadeController');
     }
 );
 Route::fallback(function () {

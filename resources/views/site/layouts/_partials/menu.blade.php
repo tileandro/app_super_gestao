@@ -13,7 +13,7 @@
             <a class="nav-link link-light {{ $titulo == 'Fornecedores' || $titulo == 'Editar Fornecedor' || $titulo == 'Criar Fornecedor' ? 'active' : ''}}" href="{{route('app.fornecedores')}}">Fornecedores</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link link-light {{ $titulo == 'Produtos' ? 'active' : ''}}" href="{{route('app.produtos')}}">Produtos</a>
+            <a class="nav-link link-light {{ $titulo == 'Produtos' ? 'active' : ''}}" href="{{route('produtos.index')}}">Produtos</a>
         </li>
         <li class="nav-item">
             <a class="nav-link link-light {{ $titulo == 'Contato' ? 'active' : ''}}" href="{{route('site.contato')}}">Contato</a>

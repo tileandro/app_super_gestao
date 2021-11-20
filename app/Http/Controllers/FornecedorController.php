@@ -24,32 +24,30 @@ class FornecedorController extends Controller
 
     public function editar($id)
     {
-        $usuario = '';
-        if (isset($_SESSION['nome']) && $_SESSION['nome'] != '') {
-            $usuario = $_SESSION['nome'];
-        }
         $fornecedor = Fornecedor::where('id', $id)->get();
+        $usuario = $fornecedor[0]->nome;
         return view('app.fornecedores.editar', ['titulo' => 'Editar Fornecedor', 'fornecedor' => $fornecedor, 'usuario' => $usuario]);
     }
 
-    public function editarFornecedores(Request $request, $id)
+    public function atualizarFornecedores(Request $request)
     {
         $request->validate(
             [
                 'nome' => 'required|max:50',
-                'uf' => 'required|max:2',
-                'email' => 'email|max:100|unique:fornecedor'
+                'uf' => 'required|max:2|min:2',
+                'email' => 'email|max:100'
             ],
             [
-                'nome.required' => 'Campo nome é obrigatório seu preenchimento',
+                'required' => 'Campo :attribute é obrigatório seu preenchimento',
                 'email.email' => 'Campo e-mail é obrigatório seu preenchimento',
-                'uf.required' => 'Campo UF é obrigatório seu preenchimento',
                 'nome.max' => 'Campo nome é permitido até 50 caracteres',
+                'uf.min' => 'Campo estado é permitido no mínimo 2 caracteres',
                 'uf.max' => 'Campo estado é permitido até 2 caracteres',
                 'email.max' => 'Campo e-mail é permitido até 100 caracteres',
                 'email.unique' => 'E-mail já cadastrado, por favor digite outro e-mail.'
             ]
         );
+
         Fornecedor::whereIn('id', [$request->input('id')])->update(
             [
                 'nome' => $request->input('nome'),
@@ -57,7 +55,8 @@ class FornecedorController extends Controller
                 'uf' => $request->input('uf')
             ]
         );
-        return back()->with('success', 'Dados editados com sucesso!');
+
+        return redirect()->route('app.editarFornecedores', $request->input('id'))->with('success', 'Fornecedor atualizado com sucesso!');
     }
 
     public function create()

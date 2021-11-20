@@ -23,31 +23,37 @@
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">NOME</th>
-                            <th scope="col">E-MAIL</th>
-                            <th scope="col">UF</th>
+                            <th scope="col">DESCRIÇÃO</th>
+                            <th scope="col">PESO</th>
+                            <th scope="col">UNIDADE DE MEDIDA (ID)</th>
                             <th scope="col">DATA DE CRIAÇÃO</th>
                             <th scope="col">DATA DE ATUALIZAÇÃO</th>
                             <th scope="col">
                                 <div class="form-group">
-                                    <a href="{{ route('app.criarFornecedor') }}" class="btn btn-primary btn-sm">Criar Fornecedor</a>
+                                    <a href="{{route('produtos.create')}}" class="btn btn-primary btn-sm">Criar Produto</a>
                                 </div>
                             </th>
-                            <th scope="col"></th>
+                            <th scope="col">
+                                <div class="form-group">
+                                    <a href="{{route('unidades.create')}}" class="btn btn-primary btn-sm">Criar Unidade de medida</a>
+                                </div>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($fornecedores as $fornecedor)
+                        @foreach ($produtos as $produto)
                             <tr>
-                                <th scope="row">{{$fornecedor['id']}}</th>
-                                <td>{{$fornecedor['nome']}}</td>
-                                <td>{{$fornecedor['email']}}</td>
-                                <td>{{$fornecedor['uf']}}</td>
-                                <td>{{date('d/m/Y h:m:s', strtotime($fornecedor['created_at']))}}</td>
-                                <td>{{date('d/m/Y h:m:s', strtotime($fornecedor['updated_at']))}}</td>
-                                <td><a href="{{route('app.editarFornecedores', $fornecedor['id'])}}" class="btn btn-warning btn-sm">Editar Fornecedor</a></td>
+                                <th scope="row">{{$produto['id']}}</th>
+                                <td>{{$produto['nome']}}</td>
+                                <td>{{$produto['descricao']}}</td>
+                                <td>{{$produto['peso']}}</td>
+                                <td>{{$produto['unidade_id']}}</td>
+                                <td>{{date('d/m/Y h:m:s', strtotime($produto['created_at']))}}</td>
+                                <td>{{date('d/m/Y h:m:s', strtotime($produto['updated_at']))}}</td>
+                                <td><a href="{{route('produtos.edit', $produto['id'])}}" class="btn btn-warning btn-sm">Editar Produto</a></td>
                                 <td>
-                                    <button type="button" class="btn btn-danger btn-sm deletar" data-toggle="modal" data-id="{{$fornecedor['id']}}" data-name="{{$fornecedor['nome']}}" data-target="#modalDeletar">
-                                        Deletar Fornecedor
+                                    <button type="button" class="btn btn-danger btn-sm deletar" data-toggle="modal" data-id="{{$produto['id']}}" data-name="{{$produto['nome']}}" data-target="#modalDeletar">
+                                        Deletar Produto
                                     </button>
                                 </td>
                             </tr>
@@ -62,17 +68,17 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-danger">
-                    <h5 class="modal-title link-light" id="TituloModalCentralizado">Deletar Fornecedor</h5>
+                    <h5 class="modal-title link-light" id="TituloModalCentralizado">Deletar Produto</h5>
                     <button type="button btn-dark" class="close" data-dismiss="modal" aria-label="Fechar">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    Tem certeza que você quer deletar o fornecedor <b></b>?
+                    Tem certeza que você deseja deletar o Produto <b></b>?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary close" data-dismiss="modal">Cancelar</button>
-                    <form method="post" action="{{route('app.fornecedores')}}">
+                    <form method="post" action="">
                         @csrf
                         <input type="hidden" name="idusuario" value="" class="idusuario"/>
                         <input type="hidden" name="nomeusuario" value="" class="nomeusuario"/>
