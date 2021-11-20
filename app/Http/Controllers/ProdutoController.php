@@ -42,14 +42,12 @@ class ProdutoController extends Controller
             [
                 'nome' => 'required',
                 'descricao' => 'required',
-                'peso' => 'required|max:3|min:1',
-                'unidade_id' => 'required'
+                'peso' => 'required|max:3|min:1'
             ],
             [
                 'required' => 'Campo :attribute é obrigatório seu preenchimento',
                 'peso.max' => 'Campo :attribute permitido no máximo 3 dígitos',
-                'peso.min' => 'Campo :attribute permitido no mínimo 1 dígitos',
-                'unidade.required' => 'Campo unidade é obrigatório seu preenchimento'
+                'peso.min' => 'Campo :attribute permitido no mínimo 1 dígitos'
             ]
         );
         Produto::create($request->all());
@@ -75,7 +73,8 @@ class ProdutoController extends Controller
      */
     public function edit(Produto $produto)
     {
-        //
+        $unidades = Unidade::all();
+        return view('app.produtos.edit', ['titulo' => "Editar produto", 'produto' => $produto, 'unidades' => $unidades]);
     }
 
     /**
@@ -87,7 +86,20 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, Produto $produto)
     {
-        //
+        $request->validate(
+            [
+                'nome' => 'required',
+                'descricao' => 'required',
+                'peso' => 'required|max:3|min:1'
+            ],
+            [
+                'required' => 'Campo :attribute é obrigatório seu preenchimento',
+                'peso.max' => 'Campo :attribute permitido no máximo 3 dígitos',
+                'peso.min' => 'Campo :attribute permitido no mínimo 1 dígitos'
+            ]
+        );
+        $produto->update($request->all());
+        return back()->with('success', 'Produto ' . $request->input('nome') . ' cadastrado com sucesso!');
     }
 
     /**
@@ -98,6 +110,7 @@ class ProdutoController extends Controller
      */
     public function destroy(Produto $produto)
     {
-        //
+        $produto->delete();
+        return back()->with('success', 'Produto deletado sucesso!');
     }
 }

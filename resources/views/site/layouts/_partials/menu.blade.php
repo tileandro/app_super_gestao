@@ -16,6 +16,9 @@
             <a class="nav-link link-light {{ $titulo == 'Produtos' ? 'active' : ''}}" href="{{route('produtos.index')}}">Produtos</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link link-light {{ $titulo == 'Unidade de Medida' ? 'active' : ''}}" href="{{route('unidades.index')}}">Unidades</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link link-light {{ $titulo == 'Contato' ? 'active' : ''}}" href="{{route('site.contato')}}">Contato</a>
         </li>
         @if (isset($usuario)  && $usuario != '')

@@ -22,33 +22,29 @@
                     <thead class="thead-light">
                         <tr>
                             <th scope="col">ID</th>
-                            <th scope="col">NOME</th>
+                            <th scope="col">UNIDADE</th>
                             <th scope="col">DESCRIÇÃO</th>
-                            <th scope="col">PESO</th>
-                            <th scope="col">UNIDADE DE MEDIDA (ID)</th>
                             <th scope="col">DATA DE CRIAÇÃO</th>
                             <th scope="col">DATA DE ATUALIZAÇÃO</th>
                             <th scope="col">
                                 <div class="form-group">
-                                    <a href="{{route('produtos.create')}}" class="btn btn-primary btn-sm">Cadastrar Produto</a>
+                                    <a href="{{route('unidades.create')}}" class="btn btn-primary btn-sm">Cadastrar unidade</a>
                                 </div>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($produtos as $produto)
+                        @foreach ($unidades as $unidade)
                             <tr>
-                                <th scope="row">{{$produto['id']}}</th>
-                                <td>{{$produto['nome']}}</td>
-                                <td>{{$produto['descricao']}}</td>
-                                <td>{{$produto['peso']}}</td>
-                                <td><a href="{{ route('unidades.show', $produto['unidade_id']) }}">{{$produto['unidade_id']}}</a></td>
-                                <td>{{date('d/m/Y h:m:s', strtotime($produto['created_at']))}}</td>
-                                <td>{{date('d/m/Y h:m:s', strtotime($produto['updated_at']))}}</td>
-                                <td><a href="{{route('produtos.edit', $produto['id'])}}" class="btn btn-warning btn-sm">Editar Produto</a></td>
+                                <th scope="row">{{$unidade['id']}}</th>
+                                <td>{{$unidade['unidade']}}</td>
+                                <td>{{$unidade['descricao']}}</td>
+                                <td>{{date('d/m/Y h:m:s', strtotime($unidade['created_at']))}}</td>
+                                <td>{{date('d/m/Y h:m:s', strtotime($unidade['updated_at']))}}</td>
+                                <td><a href="{{route('unidades.edit', $unidade['id'])}}" class="btn btn-warning btn-sm">Editar unidade</a></td>
                                 <td>
-                                    <button type="button" class="btn btn-danger btn-sm deletar" data-toggle="modal" data-id="{{$produto['id']}}" data-name="{{$produto['nome']}}" data-target="#modalDeletar">
-                                        Deletar Produto
+                                    <button type="button" class="btn btn-danger btn-sm deletar" data-toggle="modal" data-id="{{$unidade['id']}}" data-name="{{$unidade['unidade']}}" data-target="#modalDeletar">
+                                        Deletar unidade
                                     </button>
                                 </td>
                             </tr>
@@ -63,13 +59,13 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-danger">
-                    <h5 class="modal-title link-light" id="TituloModalCentralizado">Deletar Produto</h5>
+                    <h5 class="modal-title link-light" id="TituloModalCentralizado">Deletar unidade</h5>
                     <button type="button btn-dark" class="close" data-dismiss="modal" aria-label="Fechar">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    Tem certeza que você deseja deletar o Produto <b></b>?
+                    Tem certeza que você deseja deletar a unidade <b></b>?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary close" data-dismiss="modal">Cancelar</button>
@@ -87,7 +83,7 @@
             $('.deletar, .close').click(function () {
                 $('#modalDeletar').modal('toggle');
                 $('.modal-body b').html($(this).attr("data-name"));
-                $('.modal-footer form').attr("action", "/app/produtos/" + $(this).attr("data-id") + "");
+                $('.modal-footer form').attr("action", "/app/unidades/" + $(this).attr("data-id") + "");
             });
         });
     </script>
