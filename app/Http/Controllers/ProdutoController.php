@@ -15,8 +15,13 @@ class ProdutoController extends Controller
      */
     public function index()
     {
+        $usuario = '';
+        if (isset($_SESSION['nome']) && $_SESSION['nome'] != '') {
+            $usuario = $_SESSION['nome'];
+        }
+
         $produtos = Produto::all();
-        return view('app.produtos.index', ['titulo' => 'Produtos', 'produtos' => $produtos]);
+        return view('app.produtos.index', ['titulo' => 'Produtos', 'produtos' => $produtos, 'usuario' => $usuario]);
     }
 
     /**

@@ -33,6 +33,7 @@
                                     <a href="{{route('produtos.create')}}" class="btn btn-primary btn-sm">Cadastrar Produto</a>
                                 </div>
                             </th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -92,4 +93,3 @@
         });
     </script>
 @endsection
-

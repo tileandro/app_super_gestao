@@ -9,8 +9,13 @@ class UnidadeController extends Controller
 {
     public function index()
     {
+        $usuario = '';
+        if (isset($_SESSION['nome']) && $_SESSION['nome'] != '') {
+            $usuario = $_SESSION['nome'];
+        }
+
         $unidades = Unidade::all();
-        return view('app.unidades.index', ['titulo' => 'Unidades de Medida', 'unidades' => $unidades]);
+        return view('app.unidades.index', ['titulo' => 'Unidades de Medida', 'unidades' => $unidades, 'usuario' => $usuario]);
     }
 
     public function create()

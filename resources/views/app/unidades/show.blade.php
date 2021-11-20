@@ -22,7 +22,7 @@
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">UNIDADE</th>
-                <th scope="col">DESCRIÇÃO</th>
+                <th scope="col" colspan="2">DESCRIÇÃO</th>
             </tr>
         </thead>
         <tbody>

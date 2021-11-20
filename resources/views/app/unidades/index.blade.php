@@ -31,6 +31,7 @@
                                     <a href="{{route('unidades.create')}}" class="btn btn-primary btn-sm">Cadastrar unidade</a>
                                 </div>
                             </th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
