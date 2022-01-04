@@ -21,6 +21,14 @@
         @csrf
         @method('PUT')
         <div class="form-group mb-3">
+            <select class="form-control" name="fornecedor_id" id="fornecedor_id">
+                <option value="">Escolha o Fornecedor</option>
+                @foreach ($fornecedores as $fornecedor)
+                <option value="{{$fornecedor['id']}}" {{ ($produto->fornecedor->id ?? old('fornecedor_id')) == $fornecedor['id'] ? 'selected' : '' }}>{{ $produto->fornecedor->id  == $fornecedor['id'] ? $produto->fornecedor->nome : $fornecedor['nome']}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group mb-3">
           <input type="text" class="form-control" value="{{ $produto['nome'] ?? old('nome') }}" id="nome" name="nome"
             placeholder="Nome do produto">
         </div>
@@ -31,7 +39,7 @@
         <div class="form-group mb-3">
             <input type="number" class="form-control" value="{{ $produto['peso'] ?? old('peso') }}" id="peso" name="peso" placeholder="Peso do produto">
         </div>
-        <div class="form-group">
+        <div class="form-group mb-3">
             <select class="form-control" name="unidade_id" id="unidade_id">
                 <option value="">Escolha a unidade de medida</option>
                 @foreach ($unidades as $unidade)
@@ -39,8 +47,18 @@
                 @endforeach
             </select>
         </div>
+        <div class="form-group mb-3">Detalhes do Produto clique <a href="{{ route('produto-detalhe.edit', $produto->produtoDetalhe->id) }}">aqui</a> para editar</div>
+        <div class="form-group mb-3">
+            Comprimento: {{ $produto->produtoDetalhe->comprimento ?? old('comprimento') }} {{ $produto->unidade->unidade_id == $unidade['id'] ? $produto->unidade->unidade : $unidade['unidade'] }}
+        </div>
+        <div class="form-group mb-3">
+            Largura: {{ $produto->produtoDetalhe->largura ?? old('largura') }} {{ $produto->unidade->unidade_id == $unidade['id'] ? $produto->unidade->unidade : $unidade['unidade'] }}
+        </div>
+        <div class="form-group mb-3">
+            Altura: {{ $produto->produtoDetalhe->altura ?? old('altura') }} {{ $produto->unidade->unidade_id == $unidade['id'] ? $produto->unidade->unidade : $unidade['unidade'] }}
+        </div>
         <div class="form-group mt-3">
-          <button type="submit" class="btn btn-primary">Cadastrar Produto</button>
+            <button type="submit" class="btn btn-primary">Editar Produto</button>
         </div>
       </form>
     </div>

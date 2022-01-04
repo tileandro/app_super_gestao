@@ -22,9 +22,7 @@
                     <thead class="thead-light">
                         <tr>
                             <th scope="col">ID</th>
-                            <th scope="col">NOME</th>
-                            <th scope="col">DESCRIÇÃO</th>
-                            <th scope="col">FORNECEDOR</th>
+                            <th scope="col">PRODUTO</th>
                             <th scope="col">PESO</th>
                             <th scope="col">COMPRIMENTO</th>
                             <th scope="col">LARGURA</th>
@@ -33,29 +31,26 @@
                             <th scope="col">DATA DE ATUALIZAÇÃO</th>
                             <th scope="col">
                                 <div class="form-group">
-                                    <a href="{{route('produtos.create')}}" class="btn btn-primary btn-sm">Cadastrar Produto</a>
+                                    <a href="{{route('produto-detalhe.create')}}" class="btn btn-primary btn-sm">Cadastrar Detalhe</a>
                                 </div>
                             </th>
-                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($produtos as $produto)
+                        @foreach ($produtoDetalhes as $produtoDetalhe)
                             <tr>
-                                <th scope="row">{{$produto['id']}}</th>
-                                <td>{{$produto['nome']}}</td>
-                                <td>{{$produto['descricao']}}</td>
-                                <td>{{$produto->fornecedor->nome ?? ''}}</td>
-                                <td>{{$produto['peso']}} {{$produto->unidade->unidade ?? ''}}</td>
-                                <td>{{$produto->produtoDetalhe->comprimento ?? ''}} {{$produto->produtoDetalhe->unidade->unidade ?? ''}}</td>
-                                <td>{{$produto->produtoDetalhe->largura ?? ''}} {{$produto->produtoDetalhe->unidade->unidade ?? ''}}</td>
-                                <td>{{$produto->produtoDetalhe->altura ?? ''}} {{$produto->produtoDetalhe->unidade->unidade ?? ''}}</td>
-                                <td>{{date('d/m/Y h:m:s', strtotime($produto['created_at']))}}</td>
-                                <td>{{date('d/m/Y h:m:s', strtotime($produto['updated_at']))}}</td>
-                                <td><a href="{{route('produtos.edit', $produto['id'])}}" class="btn btn-warning btn-sm">Editar Produto</a></td>
+                                <th scope="row">{{$produtoDetalhe['id']}}</th>
+                                <td><a href="{{ route('produtos.edit', $produtoDetalhe->produto->id) }}">{{$produtoDetalhe->produto->nome ?? ''}}</a></td>
+                                <td>{{$produtoDetalhe->produto->peso}} {{$produtoDetalhe->produto->unidade->unidade ?? ''}}</td>
+                                <td>{{$produtoDetalhe['comprimento']}} {{$produtoDetalhe->unidade->unidade ?? ''}}</td>
+                                <td>{{$produtoDetalhe['largura']}} {{$produtoDetalhe->unidade->unidade ?? ''}}</td>
+                                <td>{{$produtoDetalhe['altura']}} {{$produtoDetalhe->unidade->unidade ?? ''}}</td>
+                                <td>{{date('d/m/Y h:m:s', strtotime($produtoDetalhe['created_at']))}}</td>
+                                <td>{{date('d/m/Y h:m:s', strtotime($produtoDetalhe['updated_at']))}}</td>
+                                <td><a href="{{route('produto-detalhe.edit', $produtoDetalhe['id'])}}" class="btn btn-warning btn-sm">Editar Detalhe</a></td>
                                 <td>
-                                    <button type="button" class="btn btn-danger btn-sm deletar" data-toggle="modal" data-id="{{$produto['id']}}" data-name="{{$produto['nome']}}" data-target="#modalDeletar">
-                                        Deletar Produto
+                                    <button type="button" class="btn btn-danger btn-sm deletar" data-toggle="modal" data-id="{{$produtoDetalhe['id']}}" data-name="{{$produtoDetalhe->produto->nome}}" data-target="#modalDeletar">
+                                        Deletar Detalhe
                                     </button>
                                 </td>
                             </tr>
@@ -70,13 +65,13 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-danger">
-                    <h5 class="modal-title link-light" id="TituloModalCentralizado">Deletar Produto</h5>
+                    <h5 class="modal-title link-light" id="TituloModalCentralizado">Deletar Detalhe</h5>
                     <button type="button btn-dark" class="close" data-dismiss="modal" aria-label="Fechar">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    Tem certeza que você deseja deletar o Produto <b></b>?
+                    Tem certeza que você deseja deletar o Detalhe <b></b>?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary close" data-dismiss="modal">Cancelar</button>
@@ -94,7 +89,7 @@
             $('.deletar, .close').click(function () {
                 $('#modalDeletar').modal('toggle');
                 $('.modal-body b').html($(this).attr("data-name"));
-                $('.modal-footer form').attr("action", "/app/produtos/" + $(this).attr("data-id") + "");
+                $('.modal-footer form').attr("action", "/app/produto-detalhe/" + $(this).attr("data-id") + "");
             });
         });
     </script>

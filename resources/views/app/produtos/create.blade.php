@@ -20,11 +20,19 @@
       <form method="post" action="{{ route('produtos.store') }}">
         @csrf
         <div class="form-group mb-3">
-          <input type="text" class="form-control" value="{{ old('nome') }}" id="nome" name="nome"
+            <select class="form-control" name="fornecedor_id" id="fornecedor_id">
+                <option value="">Escolha o Fornecedor</option>
+                @foreach ($fornecedores as $fornecedor)
+                <option value="{{$fornecedor['id']}}" {{ old('fornecedor_id') == $fornecedor['id'] ? 'selected' : '' }}>{{$fornecedor['nome']}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group mb-3">
+            <input type="text" class="form-control" value="{{ old('nome') }}" id="nome" name="nome"
             placeholder="Nome do produto">
         </div>
         <div class="form-group mb-3">
-          <input type="text" class="form-control" value="{{ old('descricao') }}" id="descricao" name="descricao"
+            <input type="text" class="form-control" value="{{ old('descricao') }}" id="descricao" name="descricao"
             placeholder="Descrição do produto">
         </div>
         <div class="form-group mb-3">
@@ -34,12 +42,12 @@
             <select class="form-control" name="unidade_id" id="unidade_id">
                 <option value="">Escolha a unidade de medida</option>
                 @foreach ($unidades as $unidade)
-                <option value="{{$unidade['id']}}">{{$unidade['descricao']}}</option>
+                <option value="{{$unidade['id']}}" {{ old('unidade_id') == $unidade['id'] ? 'selected' : '' }}>{{$unidade['descricao']}}</option>
                 @endforeach
             </select>
         </div>
         <div class="form-group mt-3">
-          <button type="submit" class="btn btn-primary">Cadastrar Produto</button>
+            <button type="submit" class="btn btn-primary">Cadastrar Produto</button>
         </div>
       </form>
     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Fornecedor;
 use App\Produto;
 use App\Unidade;
 use Illuminate\Http\Request;
@@ -32,7 +33,8 @@ class ProdutoController extends Controller
     public function create()
     {
         $unidades = Unidade::all();
-        return view('app.produtos.create', ['titulo' => 'Cadastrar Produto', 'unidades' => $unidades]);
+        $fornecedores = Fornecedor::all();
+        return view('app.produtos.create', ['titulo' => 'Cadastrar Produto', 'unidades' => $unidades, 'fornecedores' => $fornecedores]);
     }
 
     /**
@@ -47,7 +49,8 @@ class ProdutoController extends Controller
             [
                 'nome' => 'required',
                 'descricao' => 'required',
-                'peso' => 'required|max:3|min:1'
+                'peso' => 'required|max:3|min:1',
+                'fornecedor_id' => 'required'
             ],
             [
                 'required' => 'Campo :attribute é obrigatório seu preenchimento',
@@ -79,7 +82,8 @@ class ProdutoController extends Controller
     public function edit(Produto $produto)
     {
         $unidades = Unidade::all();
-        return view('app.produtos.edit', ['titulo' => "Editar produto", 'produto' => $produto, 'unidades' => $unidades]);
+        $fornecedores = Fornecedor::all();
+        return view('app.produtos.edit', ['titulo' => "Editar produto", 'produto' => $produto, 'unidades' => $unidades, 'fornecedores' => $fornecedores]);
     }
 
     /**
@@ -95,7 +99,8 @@ class ProdutoController extends Controller
             [
                 'nome' => 'required',
                 'descricao' => 'required',
-                'peso' => 'required|max:3|min:1'
+                'peso' => 'required|max:3|min:1',
+                'unidade_id' => 'required'
             ],
             [
                 'required' => 'Campo :attribute é obrigatório seu preenchimento',
@@ -104,7 +109,7 @@ class ProdutoController extends Controller
             ]
         );
         $produto->update($request->all());
-        return back()->with('success', 'Produto ' . $request->input('nome') . ' cadastrado com sucesso!');
+        return back()->with('success', 'Produto ' . $request->input('nome') . ' editaaaado com sucesso!');
     }
 
     /**
