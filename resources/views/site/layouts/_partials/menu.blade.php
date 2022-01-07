@@ -7,7 +7,10 @@
             <a class="nav-link link-light {{ $titulo == 'Sobre Nós' ? 'active' : ''}}" href="{{route('site.sobrenos')}}">Sobre Nós</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link link-light {{ $titulo == 'Clientes' ? 'active' : ''}}" href="{{route('app.clientes')}}">Clientes</a>
+            <a class="nav-link link-light {{ $titulo == 'Clientes' ? 'active' : ''}}" href="{{route('clientes.index')}}">Clientes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link link-light {{ $titulo == 'Pedidos' ? 'active' : ''}}" href="{{route('pedidos.index')}}">Pedidos</a>
         </li>
         <li class="nav-item">
             <a class="nav-link link-light {{ $titulo == 'Fornecedores' || $titulo == 'Editar Fornecedor' || $titulo == 'Criar Fornecedor' ? 'active' : ''}}" href="{{route('app.fornecedores')}}">Fornecedores</a>

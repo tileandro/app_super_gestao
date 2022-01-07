@@ -47,16 +47,24 @@
                 @endforeach
             </select>
         </div>
-        <div class="form-group mb-3">Detalhes do Produto clique <a href="{{ route('produto-detalhe.edit', $produto->produtoDetalhe->id) }}">aqui</a> para editar</div>
+        @if (isset($produto->produtoDetalhe->id))
+            <div class="form-group mb-3">
+                Detalhes do Produto clique <a href="{{ route('produto-detalhe.edit', $produto->produtoDetalhe->id) }}">aqui</a> para editar os detalhes
+            </div>
+            <div class="form-group mb-3">
+                Comprimento: {{ $produto->produtoDetalhe->comprimento ?? old('comprimento') }} {{ $produto->unidade->unidade_id == $unidade['id'] ? $produto->unidade->unidade : $unidade['unidade'] }}
+            </div>
+            <div class="form-group mb-3">
+                Largura: {{ $produto->produtoDetalhe->largura ?? old('largura') }} {{ $produto->unidade->unidade_id == $unidade['id'] ? $produto->unidade->unidade : $unidade['unidade'] }}
+            </div>
+            <div class="form-group mb-3">
+                Altura: {{ $produto->produtoDetalhe->altura ?? old('altura') }} {{ $produto->unidade->unidade_id == $unidade['id'] ? $produto->unidade->unidade : $unidade['unidade'] }}
+            </div>
+        @else
         <div class="form-group mb-3">
-            Comprimento: {{ $produto->produtoDetalhe->comprimento ?? old('comprimento') }} {{ $produto->unidade->unidade_id == $unidade['id'] ? $produto->unidade->unidade : $unidade['unidade'] }}
+            Clique <a href="{{ route('produto-detalhe.create') }}">aqui</a> para criar os detalhes desse produto
         </div>
-        <div class="form-group mb-3">
-            Largura: {{ $produto->produtoDetalhe->largura ?? old('largura') }} {{ $produto->unidade->unidade_id == $unidade['id'] ? $produto->unidade->unidade : $unidade['unidade'] }}
-        </div>
-        <div class="form-group mb-3">
-            Altura: {{ $produto->produtoDetalhe->altura ?? old('altura') }} {{ $produto->unidade->unidade_id == $unidade['id'] ? $produto->unidade->unidade : $unidade['unidade'] }}
-        </div>
+        @endif
         <div class="form-group mt-3">
             <button type="submit" class="btn btn-primary">Editar Produto</button>
         </div>

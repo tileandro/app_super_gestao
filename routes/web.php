@@ -29,8 +29,6 @@ Route::post('/login', 'LoginController@auntenticar')->name('site.login');
 Route::middleware('autenticacao')->prefix('/app')->group(
     function () {
         Route::get('/home', 'HomeController@index')->name('app.home');
-        Route::get('/clientes', 'ClientesController@index')->name('app.clientes');
-
         Route::get('/fornecedores', 'FornecedorController@index')->name('app.fornecedores');
         Route::get('/fornecedores/editar/{id}', 'FornecedorController@editar')->name('app.editarFornecedores');
         Route::post('/fornecedores/editar', 'FornecedorController@atualizarFornecedores')->name('app.atualizarFornecedores');
@@ -42,6 +40,10 @@ Route::middleware('autenticacao')->prefix('/app')->group(
         Route::resource('produtos', 'ProdutoController');
         Route::resource('unidades', 'UnidadeController');
         Route::resource('produto-detalhe', 'ProdutoDetalheController');
+        Route::resource('/clientes', 'ClienteController');
+        Route::resource('/pedidos', 'PedidoController');
+        Route::get('/pedido-produtos/create/{pedidos}', 'PedidoProdutoController@create')->name('pedido-produtos.create');
+        Route::post('/pedido-produtos/store/{pedidos}', 'PedidoProdutoController@store')->name('pedido-produtos.store');
     }
 );
 Route::fallback(function () {

@@ -50,7 +50,8 @@ class ProdutoController extends Controller
                 'nome' => 'required',
                 'descricao' => 'required',
                 'peso' => 'required|max:3|min:1',
-                'fornecedor_id' => 'required'
+                'fornecedor_id' => 'required',
+                'unidade_id' => 'required'
             ],
             [
                 'required' => 'Campo :attribute é obrigatório seu preenchimento',
@@ -100,7 +101,8 @@ class ProdutoController extends Controller
                 'nome' => 'required',
                 'descricao' => 'required',
                 'peso' => 'required|max:3|min:1',
-                'unidade_id' => 'required'
+                'unidade_id' => 'required',
+                'fornecedor_id' => 'required'
             ],
             [
                 'required' => 'Campo :attribute é obrigatório seu preenchimento',
