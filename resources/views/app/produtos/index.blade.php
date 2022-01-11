@@ -37,6 +37,7 @@
                                 </div>
                             </th>
                             <th scope="col"></th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,6 +53,16 @@
                                 <td>{{$produto->produtoDetalhe->altura ?? ''}} {{$produto->produtoDetalhe->unidade->unidade ?? ''}}</td>
                                 <td>{{date('d/m/Y h:m:s', strtotime($produto['created_at']))}}</td>
                                 <td>{{date('d/m/Y h:m:s', strtotime($produto['updated_at']))}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-info btn-sm listar" data-toggle="modal"
+                                        data-pedido="
+                                        @foreach ($produto->pedidos as $pedido)
+                                            <p>Pedido nº {{$pedido->id}} <a href='{{ route('pedido-produtos.create', ['pedidos' => $pedido->id]) }}' class='btn btn-success btn-sm' target='_blank'>Ver pedido</a></p>
+                                        @endforeach
+                                        " data-name="{{$produto['nome']}}" data-target="#modalListar">
+                                            Ver Pedidos
+                                    </button>
+                                </td>
                                 <td><a href="{{route('produtos.edit', $produto['id'])}}" class="btn btn-warning btn-sm">Editar Produto</a></td>
                                 <td>
                                     <button type="button" class="btn btn-danger btn-sm deletar" data-toggle="modal" data-id="{{$produto['id']}}" data-name="{{$produto['nome']}}" data-target="#modalDeletar">
@@ -70,7 +81,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-danger">
-                    <h5 class="modal-title link-light" id="TituloModalCentralizado">Deletar Produto</h5>
+                    <h5 class="modal-title link-light" id="TituloModalCentralizado">Deletar Produto <span></span></h5>
                     <button type="button btn-dark" class="close" data-dismiss="modal" aria-label="Fechar">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -89,12 +100,36 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modalListar" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-danger">
+                    <h5 class="modal-title link-light" id="TituloModalCentralizado">Pedidos do Produto <span></span></h5>
+                    <button type="button btn-dark" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         $(document).ready(function() {
-            $('.deletar, .close').click(function () {
+            $('.deletar, #modalDeletar .close').click(function () {
                 $('#modalDeletar').modal('toggle');
-                $('.modal-body b').html($(this).attr("data-name"));
-                $('.modal-footer form').attr("action", "/app/produtos/" + $(this).attr("data-id") + "");
+                $('#modalDeletar .modal-body b, #modalDeletar .modal-title span').html($(this).attr("data-name"));
+                $('#modalDeletar .modal-footer form').attr("action", "/app/produtos/" + $(this).attr("data-id") + "");
+            });
+
+            $('.listar, #modalListar .close').click(function () {
+                $('#modalListar').modal('toggle');
+                $('#modalListar .modal-title span').html($(this).attr("data-name"));
+                $('#modalListar .modal-body').html($(this).attr("data-pedido"));
             });
         });
     </script>

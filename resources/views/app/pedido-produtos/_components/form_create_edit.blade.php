@@ -8,6 +8,10 @@
             @endforeach
         </select>
     </div>
+    <div class="form-group mb-3">
+        <input type="number" class="form-control" value="{{ old('quantidade') ? old('quantidade') : '' }}" id="quantidade" name="quantidade"
+        placeholder="Quantidade">
+    </div>
     <div class="form-group mt-3">
         <button type="submit" class="btn btn-primary">Cadastrar Produto </button>
     </div>

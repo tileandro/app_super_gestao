@@ -42,17 +42,17 @@ class PedidoProdutoController extends Controller
     {
         $request->validate(
             [
-                'produto_id' => 'required'
+                'produto_id' => 'required',
+                'quantidade' => 'required'
             ],
             [
-                'required' => 'Escolha um produto'
+                'required' => 'O campo :attribute é obrigatório'
             ]
         );
 
-        $pedido_produtos = new PedidoProduto();
-        $pedido_produtos->pedido_id = $pedidos->id;
-        $pedido_produtos->produto_id = $request->get('produto_id');
-        $pedido_produtos->save();
+        $pedidos->produtos()->attach([
+            $request->get('produto_id') => ['quantidade' => $request->get('quantidade')]
+        ]);
 
         return back()->with('success', 'Produto cadastrado no Pedido com sucesso!');
     }
@@ -97,8 +97,9 @@ class PedidoProdutoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Pedido $pedidos, Produto $produtos)
     {
-        //
+        $pedidos->produtos()->detach($produtos->id);
+        return back()->with('success', 'Produto ' . $produtos->nome . ' deletado do Pedido com sucesso!');
     }
 }
