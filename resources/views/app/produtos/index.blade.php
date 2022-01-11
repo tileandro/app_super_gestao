@@ -103,7 +103,7 @@
     <div class="modal fade" id="modalListar" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <div class="modal-header bg-danger">
+                <div class="modal-header bg-info">
                     <h5 class="modal-title link-light" id="TituloModalCentralizado">Pedidos do Produto <span></span></h5>
                     <button type="button btn-dark" class="close" data-dismiss="modal" aria-label="Fechar">
                         <span aria-hidden="true">&times;</span>

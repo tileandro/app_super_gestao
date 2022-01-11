@@ -46,7 +46,7 @@
                                 <td>{{date('d/m/Y h:m:s', strtotime($fornecedor['created_at']))}}</td>
                                 <td>{{date('d/m/Y h:m:s', strtotime($fornecedor['updated_at']))}}</td>
                                 <td>
-                                    <button type="button" class="btn btn-primary btn-sm listar" data-toggle="modal" data-id="{{$fornecedor->nome}}"
+                                    <button type="button" class="btn btn-info btn-sm listar" data-toggle="modal" data-id="{{$fornecedor->nome}}"
                                         data-name='<table class="table table-sm table-hover">
                                             <tbody>
                                                 @foreach( $fornecedor->produtos as $key => $produto )
@@ -103,7 +103,7 @@
     <div class="modal fade" id="modalListaProdutos" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <div class="modal-header bg-danger">
+                <div class="modal-header bg-info">
                     <h5 class="modal-title link-light" id="TituloModalCentralizado">Lista de Produtos do fornecedor <p></p></h5>
                     <button type="button btn-dark" class="close" data-dismiss="modal" aria-label="Fechar">
                         <span aria-hidden="true">&times;</span>
